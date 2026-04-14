@@ -85,8 +85,9 @@ jobs:
       - name: Build IPA
         run: |
           cd simple_live_app
-          # # 1. 强制降级插件，避开代码 Bug
-          # sed -i '' 's/connectivity_plus:.*/connectivity_plus: 6.1.1/g' pubspec.yaml
+          # 1. 锁定不包含 Vision Pro 报错代码的版本
+          sed -i '' 's/connectivity_plus:.*/connectivity_plus: 6.1.1/g' pubspec.yaml
+          sed -i '' 's/device_info_plus:.*/device_info_plus: 11.1.0/g' pubspec.yaml
           
           # 2. 彻底清理环境
           flutter clean
