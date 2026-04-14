@@ -51,10 +51,15 @@ jobs:
       - name: Enable Flutter Desktop
         run: flutter config --enable-macos-desktop
 
-      # 更新Flutter的packages
-      - name: Restore packages
+      - name: Clean Flutter
         run: |
           cd simple_live_app
+          # 1. 锁定不包含 Vision Pro 报错代码的版本
+          sed -i '' 's/connectivity_plus:.*/connectivity_plus: 6.1.1/g' pubspec.yaml
+          sed -i '' 's/device_info_plus:.*/device_info_plus: 11.1.0/g' pubspec.yaml
+          
+          # 2. 彻底清理环境
+          flutter clean
           flutter pub get
 
       # 安装appdmg npm install -g appdmg
@@ -85,6 +90,14 @@ jobs:
       - name: Build IPA
         run: |
           cd simple_live_app
+          # 3. 强制更新 iOS 配置
+          cd ios
+          rm -rf Pods
+          rm -rf Podfile.lock
+          pod install --repo-update
+          
+          # 4. 再次回到目录进行构建
+          cd ..
           flutter build ios --release --no-codesign
 
       #创建未签名ipa
