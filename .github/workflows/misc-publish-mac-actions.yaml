@@ -40,6 +40,14 @@ jobs:
           java-version: "17"
           cache: "gradle"
       
+
+      # 设置Flutter
+      - name: Flutter action
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.38.x"
+          cache: true
+
       - name: Clean Flutter
         run: |
           cd simple_live_app
@@ -51,22 +59,15 @@ jobs:
           flutter clean
           flutter pub get
 
-      # 设置Flutter
-      - name: Flutter action
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.38.x"
-          cache: true
-
       # 打开MAC Desktop支持
       - name: Enable Flutter Desktop
         run: flutter config --enable-macos-desktop
 
-      # 更新Flutter的packages
-      - name: Restore packages
-        run: |
-          cd simple_live_app
-          flutter pub get
+      # # 更新Flutter的packages
+      # - name: Restore packages
+      #   run: |
+      #     cd simple_live_app
+      #     flutter pub get
 
       # 安装appdmg npm install -g appdmg
       - name: Install appdmg
@@ -95,6 +96,7 @@ jobs:
       #打包iOS
       - name: Build IPA
         run: |
+          cd simple_live_app
           # 3. 强制更新 iOS 配置
           cd ios
           rm -rf Pods
