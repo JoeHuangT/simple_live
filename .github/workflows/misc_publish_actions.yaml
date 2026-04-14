@@ -1,4 +1,4 @@
-name: app-build-action-dev
+name: misc-publish-actions
 
 on:
   workflow_dispatch:
