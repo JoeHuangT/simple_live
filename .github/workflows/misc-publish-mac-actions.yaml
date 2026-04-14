@@ -9,7 +9,7 @@ on:
 jobs:
   # 打包Android、iOS、Mac
   build-mac-ios-android:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     permissions:
       contents: write
@@ -65,21 +65,21 @@ jobs:
       - name: Install flutter_distributor
         run: dart pub global activate flutter_distributor
 
-      # 打包APK
-      - name: Build APK
-        run: |
-          cd simple_live_app
-          flutter build apk --release --split-per-abi
+      # # 打包APK
+      # - name: Build APK
+      #   run: |
+      #     cd simple_live_app
+      #     flutter build apk --release --split-per-abi
 
-      #上传Artifacts
-      - name: Upload APK to Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: android
-          path: |
-            simple_live_app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
-            simple_live_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-            simple_live_app/build/app/outputs/flutter-apk/app-x86_64-release.apk
+      # #上传Artifacts
+      # - name: Upload APK to Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: android
+      #     path: |
+      #       simple_live_app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+      #       simple_live_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+      #       simple_live_app/build/app/outputs/flutter-apk/app-x86_64-release.apk
 
       #打包iOS
       - name: Build IPA
