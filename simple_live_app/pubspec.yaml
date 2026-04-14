@@ -60,7 +60,7 @@ dependencies:
   flutter_inappwebview: ^6.1.5 #WebView
   # connectivity_plus: ^7.0.0 #网络状态
   connectivity_plus: 6.1.1 #网络状态
-  device_info_plus: 10.1.0 #设备信息
+  device_info_plus: 11.1.0 #设备信息
   qr_code_scanner_plus: ^2.0.14 #二维码扫描
   volume_controller: ^3.4.0 #音量控制
 
