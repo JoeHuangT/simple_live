@@ -85,16 +85,21 @@ jobs:
       - name: Build IPA
         run: |
           cd simple_live_app
-          # 1. 清理 Flutter 缓存
+          # 1. 强制降级插件，避开代码 Bug
+          sed -i '' 's/connectivity_plus:.*/connectivity_plus: 6.1.1/g' pubspec.yaml
+          
+          # 2. 彻底清理环境
           flutter clean
           flutter pub get
-          # 2. 强制重新安装 Pods
+          
+          # 3. 强制更新 iOS 配置
           cd ios
           rm -rf Pods
           rm -rf Podfile.lock
           pod install --repo-update
+          
+          # 4. 再次回到目录进行构建
           cd ..
-          # 3. 重新构建
           flutter build ios --release --no-codesign
         # run: |
         #   cd simple_live_app
