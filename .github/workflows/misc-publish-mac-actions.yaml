@@ -63,7 +63,7 @@ jobs:
 
       # 设置flutter_distributor环境
       - name: Install flutter_distributor
-        run: dart pub global activate flutter_distributor
+        run: dart pub global activate flutter_distributor      
 
       # # 打包APK
       # - name: Build APK
@@ -85,7 +85,20 @@ jobs:
       - name: Build IPA
         run: |
           cd simple_live_app
+          # 1. 清理 Flutter 缓存
+          flutter clean
+          flutter pub get
+          # 2. 强制重新安装 Pods
+          cd ios
+          rm -rf Pods
+          rm -rf Podfile.lock
+          pod install --repo-update
+          cd ..
+          # 3. 重新构建
           flutter build ios --release --no-codesign
+        # run: |
+        #   cd simple_live_app
+        #   flutter build ios --release --no-codesign
 
       #创建未签名ipa
       - name: Create IPA
