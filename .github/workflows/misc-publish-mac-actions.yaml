@@ -85,8 +85,8 @@ jobs:
       - name: Build IPA
         run: |
           cd simple_live_app
-          # 1. 强制降级插件，避开代码 Bug
-          sed -i '' 's/connectivity_plus:.*/connectivity_plus: 6.1.1/g' pubspec.yaml
+          # # 1. 强制降级插件，避开代码 Bug
+          # sed -i '' 's/connectivity_plus:.*/connectivity_plus: 6.1.1/g' pubspec.yaml
           
           # 2. 彻底清理环境
           flutter clean
