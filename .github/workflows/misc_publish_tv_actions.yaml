@@ -1,4 +1,4 @@
-name: misc-publish-actions
+name: misc-publish-actions-tv
 
 on:
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@v2
         with:
-            flutter-version: "3.22.x"
+            flutter-version: "3.24.x"
             cache: true
 
       #更新Flutter的packages
