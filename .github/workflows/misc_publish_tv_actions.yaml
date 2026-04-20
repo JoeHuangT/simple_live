@@ -53,6 +53,7 @@ jobs:
             # 策略一：如果 pubspec.yaml 中直接写了 lottie 依赖，用 sed 将其替换为固定的低版本
             # 注意 macOS 下的 sed -i 后面必须跟 ''
             sed -i '' 's/lottie: .*/lottie: 3.1.2/g' pubspec.yaml
+            sed -i '' 's/extended_image: .*/extended_image: 9.0.2/g' pubspec.yaml
 
       #更新Flutter的packages
       - name: Restore packages
